@@ -83,6 +83,7 @@ def binary_search(L, v, lidx, ridx, ops=0):
     return binary_search(L, v, lidx, mid-1, ops)
   elif v > L[mid]:
     return binary_search(L, v, mid+1, ridx, ops)
+
 import numpy as np
 np.random.seed(1)
 l = np.random.randint(1, 100, 10000)
