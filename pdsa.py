@@ -48,9 +48,9 @@ def linear_search(l, val):
   print("worst case ops:", ops)
   return False
 
-# # O(n) due to slicing
+# # recursive O(n) due to slicing
 # def binary_search(l, val, ops=0):
-#   l.sort() # needs sorted list
+#   # needs sorted list
 
 #   m = len(l) // 2
 #   ops += 1
@@ -68,24 +68,30 @@ def linear_search(l, val):
 #   else:
 #     return binary_search(l[:m], val, ops)
 
-# O(log n) implementation
-def binary_search(L, v, lidx, ridx):
+# recursive O(log n)
+def binary_search(L, v, lidx, ridx, ops=0):
+  # needs a sorted list
+  if ridx - lidx < 0:
+    print("worst case ops:", ops)
+    return False
   mid = (lidx + ridx) // 2
+  ops += 1
   if v == L[mid]:
-    return mid
-  if v < L[mid]:
-    return binary_search(L, v, lidx, mid-1)
-  else:
-    return binary_search(L, v, mid+1, ridx)
-
+    print("found at index:", mid)
+    return True
+  if v <  L[mid]:
+    return binary_search(L, v, lidx, mid-1, ops)
+  elif v > L[mid]:
+    return binary_search(L, v, mid+1, ridx, ops)
 import numpy as np
 np.random.seed(1)
 l = np.random.randint(1, 100, 10000)
 # print(f"list: {l}\nn: {len(l)}")
+l.sort()
 
 print(linear_search(l, 101))
 
-print(binary_search(l, 101))
+print(binary_search(l, 101, 0, len(l)-1))
 
 """<u>**Sorting**</u>"""
 
